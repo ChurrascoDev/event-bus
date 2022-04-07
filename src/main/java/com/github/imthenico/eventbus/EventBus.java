@@ -39,7 +39,7 @@ public interface EventBus<E> extends EventPublisher<E> {
 
     <T extends E> @NotNull EventSubscriber<T> getSubscriber(@NotNull Class<T> eventClass);
     
-    <T extends E> void addEventValidator(@NotNull Class<T> p0, @NotNull EventValidator<T> p1);
+    <T extends E> void addEventValidator(@NotNull Class<T> eventClass, @NotNull EventValidator<T> eventValidator);
     
     @Nullable EventValidator<E> getDefaultValidator();
 

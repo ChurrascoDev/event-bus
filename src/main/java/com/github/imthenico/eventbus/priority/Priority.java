@@ -17,7 +17,7 @@ public class Priority implements Comparable<Priority> {
     
     private final byte value;
     
-    private Priority(final byte value) {
+    private Priority(byte value) {
         this.value = value;
     }
     
@@ -26,11 +26,11 @@ public class Priority implements Comparable<Priority> {
     }
     
     @Override
-    public int compareTo(@NotNull final Priority o) {
+    public int compareTo(@NotNull Priority o) {
         return Integer.compare(this.value, o.value);
     }
     
-    public static Priority of(final int value) {
+    public static Priority of(int value) {
         return new Priority((byte)value);
     }
 }

@@ -22,7 +22,7 @@ public class SimpleEventSubscriber<E> implements EventSubscriber<E> {
     private final Class<E> eventClass;
     private final List<SubscribedHandler<E>> subscribedHandlers;
     
-    public SimpleEventSubscriber(final Class<E> eventClass) {
+    public SimpleEventSubscriber(Class<E> eventClass) {
         this.subscriptionMap = new ConcurrentHashMap<>();
         this.subscribedHandlers = new CopyOnWriteArrayList<>();
         this.eventClass = Objects.requireNonNull(eventClass);
@@ -40,10 +40,10 @@ public class SimpleEventSubscriber<E> implements EventSubscriber<E> {
             throw new IllegalStateException("'" + key.getName() + "' is already registered");
         }
 
-        final Subscription<E> subscription = new Subscription<>(key, this.eventClass, eventHandler, priority);
+        Subscription<E> subscription = new Subscription<>(key, this.eventClass, eventHandler, priority);
         this.subscriptionMap.put(key, subscription);
 
-        final SubscribedHandler<E> subscribedHandler = new SubscribedHandler<>(key, priority, eventHandler);
+        SubscribedHandler<E> subscribedHandler = new SubscribedHandler<>(key, priority, eventHandler);
         this.subscribedHandlers.add(subscribedHandler);
         this.sortHandlers();
 
@@ -75,10 +75,9 @@ public class SimpleEventSubscriber<E> implements EventSubscriber<E> {
     public boolean isSubscribed(@NotNull Key key) {
         return subscriptionMap.containsKey(key);
     }
-    
-    @NotNull
+
     @Override
-    public PublishResult callHandlers(@NotNull E event) {
+    public @NotNull PublishResult callHandlers(@NotNull E event) {
         Objects.requireNonNull(event);
         List<Throwable> errors = new ArrayList<>();
 

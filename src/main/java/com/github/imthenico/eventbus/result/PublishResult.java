@@ -9,7 +9,7 @@ public class PublishResult {
     private final List<Throwable> exceptions;
     private final boolean consumed;
     
-    public PublishResult(final List<Throwable> exceptions, final boolean consumed) {
+    public PublishResult(List<Throwable> exceptions, boolean consumed) {
         this.exceptions = Collections.unmodifiableList(Objects.requireNonNull(exceptions));
         this.consumed = consumed;
     }

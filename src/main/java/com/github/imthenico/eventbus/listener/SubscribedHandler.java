@@ -9,7 +9,7 @@ public class SubscribedHandler<E> implements Comparable<SubscribedHandler<E>> {
     private final Priority priority;
     private final EventHandler<E> eventHandler;
     
-    public SubscribedHandler(final Key key, final Priority priority, final EventHandler<E> eventHandler) {
+    public SubscribedHandler(Key key, Priority priority, EventHandler<E> eventHandler) {
         this.key = key;
         this.priority = priority;
         this.eventHandler = eventHandler;
@@ -28,7 +28,7 @@ public class SubscribedHandler<E> implements Comparable<SubscribedHandler<E>> {
     }
     
     @Override
-    public int compareTo(@NotNull final SubscribedHandler<E> o) {
+    public int compareTo(@NotNull SubscribedHandler<E> o) {
         return this.priority.compareTo(o.priority);
     }
 }

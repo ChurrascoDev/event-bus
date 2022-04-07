@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Key {
     private final String name;
     
-    private Key(final String name) {
+    private Key(String name) {
         Objects.requireNonNull(this.name = name);
     }
     
@@ -14,20 +14,20 @@ public class Key {
         return this.name;
     }
     
-    public Key namespace(final String value) {
+    public Key namespace(String value) {
         Objects.requireNonNull(value);
         return new Key(this.name + ":" + value);
     }
     
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
         if (!(o instanceof Key)) {
             return false;
         }
-        final Key key = (Key)o;
+        Key key = (Key)o;
         return this.name.equals(key.name);
     }
     
@@ -40,11 +40,11 @@ public class Key {
         return new Key(UUID.randomUUID().toString());
     }
     
-    public static Key of(final String name) {
+    public static Key of(String name) {
         return new Key(name);
     }
     
-    public static Key namespace(final String namespace, final String value) {
+    public static Key namespace(String namespace, String value) {
         return of(namespace + ":" + value);
     }
 }
