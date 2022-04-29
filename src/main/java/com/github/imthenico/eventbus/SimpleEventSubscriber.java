@@ -79,21 +79,18 @@ public class SimpleEventSubscriber<E> implements EventSubscriber<E> {
     @Override
     public @NotNull PublishResult callHandlers(@NotNull E event) {
         Objects.requireNonNull(event);
-        List<Throwable> errors = new ArrayList<>();
 
-        if (subscribedHandlers.isEmpty()) {
-            return new PublishResult(errors, false);
-        }
-
-        for (SubscribedHandler<E> handler : subscribedHandlers) {
-            try {
-                handler.getEventHandler().handleEvent(event);
-            } catch (Throwable throwable) {
-                errors.add(throwable);
+        if (!subscribedHandlers.isEmpty()) {
+            for (SubscribedHandler<E> handler : subscribedHandlers) {
+                try {
+                    handler.getEventHandler().handleEvent(event);
+                } catch (Throwable throwable) {
+                    return new PublishResult(throwable);
+                }
             }
         }
 
-        return new PublishResult(errors, true);
+        return new PublishResult(null);
     }
 
     @SuppressWarnings("unchecked")
